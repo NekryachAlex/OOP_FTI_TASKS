@@ -19,7 +19,7 @@ private:
 	private:
 		HashMap<TypeOfKey, TypeOfValue, Strategy, Types ...>& map;
 		mapIter iterator;
-		Strategy<Types ...>& strategy;
+		Strategy<TypeOfKey>& strategy;
 		Map& table;
 
 	public:
