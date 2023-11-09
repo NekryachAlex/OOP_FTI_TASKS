@@ -87,7 +87,7 @@ public:
 	{
 		std::swap(*this, another_map);
 	}
-	HashMap& operator =(HashMap&& another_map)
+	HashMap& operator=(HashMap&& another_map)
 	{
 		if (another_map != *this)
 		{
