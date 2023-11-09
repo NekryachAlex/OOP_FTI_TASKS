@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include <utility>
 
-template<class TypeOfValue, class TypeOfKey, template<class TypeOfKeyOfStrategy> class Strategy, typename ... Types>
+template<class TypeOfValue, class TypeOfKey, template<class TypeOfKey> class Strategy, typename ... Types>
 class HashMap final
 {
 
@@ -81,7 +81,21 @@ private:
 	}
 public:
 	HashMap(Types ... Args) : strategy(Args...) {}
-	
+	HashMap(const HashMap&) = default;
+	HashMap& operator =(const HashMap&) = default;
+	HashMap(HashMap&& another_map)
+	{
+		std::swap(*this, another_map);
+	}
+	HashMap& operator =(HashMap&& another_map)
+	{
+		if (another_map != *this)
+		{
+			std::swap(*this, another_map);
+		}
+		return *this;
+	}
+
 	std::pair<HashMapIterator, bool> insert(const std::pair<const TypeOfKey, TypeOfValue>& _info)
 	{
 
