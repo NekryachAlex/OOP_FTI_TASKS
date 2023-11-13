@@ -7,7 +7,7 @@ class NoStrategy : public Strategy<TypeOfKey>
 {
 	std::unordered_set<TypeOfKey> keys;
 	using iterator = typename std::unordered_set<TypeOfKey>::iterator;
-
+public:
 	virtual bool getPermission(const TypeOfKey& key)
 	{
 		return (keys.find(key) != keys.end());

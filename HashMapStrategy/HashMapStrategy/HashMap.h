@@ -26,8 +26,8 @@ private:
 		using iterator_category = std::forward_iterator_tag;;
 		using difference_type = std::ptrdiff_t;
 		using value_type = std::pair<const TypeOfKey, TypeOfValue>;
-		using pointer = std::pair<const TypeOfKey, TypeOfValue>*;
-		using reference = TypeOfValue&;
+		using pointer = value_type*;
+		using reference = value_type&;
 
 		HashMapIterator(HashMap<TypeOfValue, TypeOfKey, Strategy, Types ...>& _map, mapIter _iterator) :
 			map(_map), iterator(_iterator), strategy(_map.strategy), table(_map.table) {}
@@ -58,7 +58,7 @@ private:
 
 		reference operator*() const
 		{
-			TypeOfKey key = (*this).first;
+			TypeOfKey key = (*iterator).first;
 			bool permissoin = strategy.getAccess(key);
 			if (permissoin)
 			{
@@ -69,7 +69,7 @@ private:
 
 		pointer operator->()
 		{
-			return iterator;
+			return &(*iterator);
 		}
 	};
 
@@ -106,12 +106,12 @@ public:
 			HashMapIterator myIterator(*this, stdIterator.first);
 			return { myIterator, stdIterator.second };
 		}
-		return { getIterator(_info.first), false }; //вернет end() если нет в таблице
+		return { getIterator(_info.first), false }; 
 	}
 
 	HashMapIterator begin()
 	{
-		auto mapIterator = table.begin();
+		mapIter mapIterator = table.begin();
 		if (mapIterator == table.end())
 		{
 			return HashMapIterator(*this, mapIterator);
