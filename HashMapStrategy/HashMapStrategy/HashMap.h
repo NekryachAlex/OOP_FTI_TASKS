@@ -44,7 +44,7 @@ private:
 		HashMapIterator& operator++()
 		{
 			++iterator;
-			if (iterator != table.end())
+			while (iterator != table.end())
 			{
 				TypeOfKey key = (*iterator).first;
 				if (strategy.getPermission(key))
