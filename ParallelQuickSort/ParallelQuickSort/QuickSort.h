@@ -35,12 +35,12 @@ namespace sortFunction
 	template <class RandomAccessIterator, typename Compare = std::less<>,
 			typename T = std::enable_if<std::is_same<typename std::iterator_traits<RandomAccessIterator>::iterator_category,
 			std::random_access_iterator_tag>::value>>
-		void quickSort(RandomAccessIterator first, RandomAccessIterator last, const Compare& comp = Compare{}) {
-		auto NumberOfThreads = policy.getNumberOfThreads();
+		void quickSort(RandomAccessIterator first, RandomAccessIterator last, Compare& comp = Compare{}) {
+		auto NumberOfThreads = size_t NumberOfThreads = std::thread::hardware_concurrency();
 		auto size = std::distance(first, last);
 		auto NumberOfSlices = static_cast<size_t>(round(static_cast<double>(size) / static_cast<double>(NumberOfSlices)));
 
-		if (NumberOfThreads != 1) {
+		if (NumberOfThreads != 1 || NumberOfThreads != 0) {
 			std::vector<RandomAccessIterator> slices;
 
 			for (size_t i = 0; i < NumberOfSlices; ++i)
