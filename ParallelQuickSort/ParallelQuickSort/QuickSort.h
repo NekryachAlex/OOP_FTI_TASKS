@@ -2,15 +2,14 @@
 #include <algorithm>
 #include <vector>
 #include <iterator>
-#include <functional>
 #include <future>
 #include <cmath>
 #include "Policies.h"
 
 namespace sortFunction
 {
-	template <class RandomAccessIterator, typename Compare>
-	void sort(RandomAccessIterator first, RandomAccessIterator last, const Compare& comp) {
+	template <class RandomAccessIterator, typename Compare = std::less<>>
+	void sort(RandomAccessIterator first, RandomAccessIterator last, Compare comp = Compare{}) {
 		if (first != last) {
 			RandomAccessIterator left = first;
 			RandomAccessIterator right = last;
@@ -35,17 +34,17 @@ namespace sortFunction
 	template <class RandomAccessIterator, typename Compare = std::less<>,
 			typename T = std::enable_if<std::is_same<typename std::iterator_traits<RandomAccessIterator>::iterator_category,
 			std::random_access_iterator_tag>::value>>
-		void quickSort(RandomAccessIterator first, RandomAccessIterator last, Compare& comp = Compare{}) {
-		auto NumberOfThreads = size_t NumberOfThreads = std::thread::hardware_concurrency();
+		void quickSort(RandomAccessIterator first, RandomAccessIterator last, Compare comp = Compare{}) {
+		auto NumberOfThreads = std::thread::hardware_concurrency();
 		auto size = std::distance(first, last);
-		auto NumberOfSlices = static_cast<size_t>(round(static_cast<double>(size) / static_cast<double>(NumberOfSlices)));
+		auto SizeOfSlice = static_cast<size_t>(round(static_cast<double>(size) / static_cast<double>(NumberOfThreads)));
 
-		if (NumberOfThreads != 1 || NumberOfThreads != 0) {
+		if (NumberOfThreads != 1 && NumberOfThreads != 0) {
 			std::vector<RandomAccessIterator> slices;
 
-			for (size_t i = 0; i < NumberOfSlices; ++i)
+			for (size_t i = 0; i < NumberOfThreads; ++i)
 			{
-				auto slice = first + i * difference;
+				auto slice = first + i * SizeOfSlice;
 				slices.push_back(slice);
 			}
 			slices.push_back(last);
@@ -55,7 +54,7 @@ namespace sortFunction
 			for (size_t i = 0; i < slices.size() - 1; ++i)
 			{
 				futures.push_back(std::async(std::launch::async,
-					sortFunction::sort<Iterator, Compare>, std::ref(slices[i]), std::ref(slices[i + 1]), std::ref(comp)));
+					sortFunction::sort<RandomAccessIterator, Compare>, std::ref(slices[i]), std::ref(slices[i + 1]), std::ref(comp)));
 			}
 
 			for (auto& thread : futures)
