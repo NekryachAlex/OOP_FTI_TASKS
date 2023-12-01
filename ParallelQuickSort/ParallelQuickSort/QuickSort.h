@@ -5,20 +5,26 @@
 #include <iterator>
 #include <future>
 #include <cmath>
+#include "Policies.h"
+
 namespace sortFunction
 {
 	template <class RandomAccessIterator, typename Compare = std::less<>>
-	void sort(RandomAccessIterator first, RandomAccessIterator last, Compare comp = Compare{}) {
-		if (first != last) {
+	void sort(RandomAccessIterator first, RandomAccessIterator last, Compare comp = Compare{}) 
+	{
+		if (first != last) 
+		{
 			RandomAccessIterator left = first;
 			RandomAccessIterator right = last;
 			RandomAccessIterator pivot = left++;
 
 			while (left != right) {
-				if (comp(*left, *pivot)) {
+				if (comp(*left, *pivot)) 
+				{
 					++left;
 				}
-				else {
+				else 
+				{
 					while ((left != --right) && comp(*pivot, *right));
 					std::iter_swap(left, right);
 				}
@@ -33,12 +39,15 @@ namespace sortFunction
 	template <class RandomAccessIterator, typename Compare = std::less<>,
 		typename T = std::enable_if<std::is_same<typename std::iterator_traits<RandomAccessIterator>::iterator_category,
 		std::random_access_iterator_tag>::value>>
-		void quickSort(RandomAccessIterator first, RandomAccessIterator last, size_t NumberOfThreads, Compare comp = Compare{}) {
-		//size_t NumberOfThreads = std::thread::hardware_concurrency();
+	void quickSort(RandomAccessIterator first, RandomAccessIterator last, const Policy& policy = SuitablePolicy{}, Compare comp = Compare{})
+	{
+		
 		auto size = std::distance(first, last);
+		size_t NumberOfThreads = policy.getNumberOfThreads(size);
 		auto SizeOfSlice = static_cast<size_t>(floor(static_cast<double>(size) / static_cast<double>(NumberOfThreads)));
 
-		if (NumberOfThreads > 1) {
+		if (NumberOfThreads > 1)
+		{
 			std::vector<RandomAccessIterator> slices;
 
 			for (size_t i = 0; i < NumberOfThreads; ++i)
