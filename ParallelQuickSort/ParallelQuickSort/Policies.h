@@ -9,20 +9,20 @@ public:
 	virtual size_t getNumberOfThreads(size_t  size) const = 0;
 };
 
-class OneThread final : public Policy
+class OneThreadPolicy final : public Policy
 {
 public:
-	OneThread() = default;
+	OneThreadPolicy() = default;
 	virtual size_t getNumberOfThreads(size_t  size) const override
 	{
 		return 1;
 	}
 };
 
-class MaxThreads final : public Policy
+class MaxThreadsPolicy final : public Policy
 {
 public:
-	MaxThreads() = default;
+	MaxThreadsPolicy() = default;
 	virtual size_t getNumberOfThreads(size_t  size) const override
 	{
 		return std::thread::hardware_concurrency();
@@ -50,11 +50,11 @@ public:
 	SuitablePolicy() = default;
 	virtual size_t getNumberOfThreads(size_t  size = 100) const override
 	{ 
-		if (size <= 500) 
-		{ 
+		auto mapIterator = suitableAmount.lower_bound(size);
+		if (mapIterator == suitableAmount.end())
+		{
 			return 1;
 		}
-		auto mapIterator = suitableAmount.lower_bound(size);
-		return (--mapIterator)->second;
+		return mapIterator->second - 1;
 	}
 };

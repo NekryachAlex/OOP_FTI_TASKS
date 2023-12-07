@@ -5,7 +5,6 @@
 
 TEST(oneElemInt, Vectors) {
     std::vector<int>  testVector = { 1 };
-    SuitablePolicy policy;
     EXPECT_NO_THROW(sortFunction::quickSort(testVector.begin(), testVector.end()));
 
 }
