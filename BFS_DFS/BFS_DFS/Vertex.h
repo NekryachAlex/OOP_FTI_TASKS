@@ -8,14 +8,14 @@ public:
     Vertex() = default;
 
     Vertex(const std::string& _name) : name(_name) {};
-    
-    static size_t VertexHashFunction(const Vertex& vertex)
+
+    static struct VertexHashFunction
     {
-        size_t hash = std::hash<std::string>()(vertex.getName());
-        return hash;
-
+        size_t operator()(const Vertex& vertex) const
+        {
+            return  std::hash<std::string>()(vertex.getName());
+        }
     };
-
     bool operator==(const Vertex& other) const 
     {
         return name == other.name;
@@ -26,9 +26,9 @@ public:
         return name;
     };
 
-    bool operator<(const Vertex& vertex) const 
+    bool operator==(const Vertex& vertex) const 
     {
-        return name < vertex.name;
+        return name == vertex.name;
     }
 
 private:

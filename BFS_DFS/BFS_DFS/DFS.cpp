@@ -1,33 +1,35 @@
 #include "BFS.h"
-#include <deque>
+#include <stack>
 #include <unordered_set>
+
 void BFSalgorithm::initAlgorithm()
 {
 	Vertex& startingVertex = start();
+	
+	std::stack<Vertex&> waitingVertex;
+	waitingVertex.push(startingVertex);
+	std::unordered_set<Vertex, Vertex::VertexHashFunction> visitedVertexes;
 
-	std::deque<Vertex&> waitingVertex;
-	waitingVertex.push_back(startingVertex);
-	std::unordered_set<Vertex, Vertex::VertexHashFunction> visitedVertexes; //trouble with storage of reference to Vertex (insert and count will be broken).
-	//I think  problem is usage not constant variables (not const Vertex), but i couln't solve this problem.
 	while (waitingVertex.size() != 0)
 	{
-		Vertex& consideringVertex = waitingVertex.front();
-		waitingVertex.pop_front();
+		Vertex& consideringVertex = waitingVertex.top();
+		waitingVertex.pop();
 		vertexVisiting(consideringVertex);
 		visitedVertexes.insert(consideringVertex);
 
 		std::pair<Graph::iterator, Graph::iterator> neighbors = graph.getNeighbor(consideringVertex);
 		Graph::iterator neighbor = neighbors.first;
-		do 
+		do
 		{
+
 			Vertex& addingVertex = (neighbor->second).getSecondVertex();
 			if (visitedVertexes.count(addingVertex) != 0) //c++20 contains function exists
 			{
 				continue;
 			}
 			edgeVisiting(neighbor->second);
-			
-			waitingVertex.push_back(addingVertex);
+
+			waitingVertex.push((neighbor->second).getSecondVertex());
 			visitedVertexes.insert(addingVertex);
 			neighbor++;
 		} while (neighbor != neighbors.second);

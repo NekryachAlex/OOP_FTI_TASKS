@@ -28,16 +28,17 @@ public:
         return secondVertex;
     }
 
-    bool operator<(Edge& edge)
+    bool operator==(Edge& edge)
     {
-        return firstVertex < edge.getFirstVertex();
+        return firstVertex == edge.getFirstVertex();
     }
      
     struct EdgeHashFunction
     {
         size_t operator()(const Vertex& vertex) const
         {
-            return  Vertex::VertexHashFunction(vertex);
+            Vertex::VertexHashFunction hash;
+            return  hash(vertex);
         }
 
     };
