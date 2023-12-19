@@ -14,8 +14,8 @@ public:
     Graph(const std::unordered_multimap<Vertex,Edge, Edge::EdgeHashFunction>& _graph) : edges(_graph) {};
 
     void AddEdge(Edge& edge);
-
     std::pair<iterator, iterator> getNeighbor(const Vertex& startingVertex);
+    iterator end();
 
 private:
     Map edges;

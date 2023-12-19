@@ -11,3 +11,8 @@ std::pair<Graph::iterator, Graph::iterator> Graph::getNeighbor(const Vertex& sta
 {
 	return edges.equal_range(startingVertex);
 }
+
+Graph::iterator Graph::end()
+{
+	return edges.end();
+}
