@@ -17,18 +17,18 @@ public:
         return weight;
     }
 
-    const Vertex& getFirstVertex() const
+    Vertex& getFirstVertex() 
     {
         return firstVertex;
     }
 
 
-    const Vertex& getSecondVertex() const 
+    Vertex& getSecondVertex()
     {
         return secondVertex;
     }
 
-    bool operator<(const Edge& edge) const 
+    bool operator<(Edge& edge)
     {
         return firstVertex < edge.getFirstVertex();
     }

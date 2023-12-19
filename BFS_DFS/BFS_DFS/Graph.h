@@ -7,15 +7,15 @@
 
 class Graph final {
 public:
-    using Map = typename std::unordered_multimap<Vertex,Edge, Edge::EdgeHashFunction>;
-    using iterator = typename Map::const_iterator;
+    using Map = std::unordered_multimap<Vertex, Edge, Edge::EdgeHashFunction>;
+    using iterator = Map::iterator;
     Graph() = default;
     
     Graph(const std::unordered_multimap<Vertex,Edge, Edge::EdgeHashFunction>& _graph) : edges(_graph) {};
 
-    void AddEdge(const Edge& edge);
+    void AddEdge(Edge& edge);
 
-    std::pair<iterator, iterator> getNeighbor(const Vertex& startingVertex) const;
+    std::pair<iterator, iterator> getNeighbor(const Vertex& startingVertex);
 
 private:
     Map edges;
