@@ -1,23 +1,37 @@
-#include "BFS.h"
+#include "DFS.h"
 #include <stack>
 #include <unordered_set>
 
-void BFSalgorithm::initAlgorithm()
+
+Vertex& DFSalgorithm::start()
+{
+	return startingVertex;
+}
+void DFSalgorithm::end()
+{
+}
+void DFSalgorithm::vertexVisiting(Vertex&)
+{
+}
+void DFSalgorithm::edgeVisiting(Edge&)
+{
+}
+void DFSalgorithm::initAlgorithm()
 {
 	Vertex& startingVertex = start();
 	
-	std::stack<Vertex&> waitingVertex;
-	waitingVertex.push(startingVertex);
+	std::stack<Vertex*> waitingVertex;
+	waitingVertex.push(&startingVertex);
 	std::unordered_set<Vertex, Vertex::VertexHashFunction> visitedVertexes;
 
 	while (waitingVertex.size() != 0)
 	{
-		Vertex& consideringVertex = waitingVertex.top();
+		Vertex* consideringVertex = waitingVertex.top();
 		waitingVertex.pop();
-		vertexVisiting(consideringVertex);
-		visitedVertexes.insert(consideringVertex);
+		vertexVisiting(*consideringVertex);
+		visitedVertexes.insert(*consideringVertex);
 
-		std::pair<Graph::iterator, Graph::iterator> neighbors = graph.getNeighbor(consideringVertex);
+		std::pair<Graph::iterator, Graph::iterator> neighbors = graph.getNeighbor(*consideringVertex);
 		Graph::iterator neighbor = neighbors.first;
 		do
 		{
@@ -29,7 +43,7 @@ void BFSalgorithm::initAlgorithm()
 			}
 			edgeVisiting(neighbor->second);
 
-			waitingVertex.push((neighbor->second).getSecondVertex());
+			waitingVertex.push(&(neighbor->second).getSecondVertex());
 			visitedVertexes.insert(addingVertex);
 			neighbor++;
 		} while (neighbor != neighbors.second);

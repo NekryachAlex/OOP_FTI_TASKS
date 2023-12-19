@@ -4,7 +4,7 @@
 class DFSalgorithm final : public Strategy
 {
 public:
-	DFSalgorithm(Graph& _graph) : graph(_graph) {};
+	DFSalgorithm(Graph& _graph, Vertex& _startingVertex): graph(_graph), startingVertex(_startingVertex) {};
 
 	void initAlgorithm() override;
 
@@ -16,4 +16,5 @@ protected:
 
 private:
 	Graph& graph;
+	Vertex& startingVertex;
 };

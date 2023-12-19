@@ -26,10 +26,6 @@ public:
         return name;
     };
 
-    bool operator==(const Vertex& vertex) const 
-    {
-        return name == vertex.name;
-    }
 
 private:
     std::string name;
