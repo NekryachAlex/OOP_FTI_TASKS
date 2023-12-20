@@ -31,7 +31,7 @@ void BFSalgorithm::initAlgorithm()
 		visitedVertexes.insert(*consideringVertex);
 
 		std::pair<Graph::iterator, Graph::iterator> neighbors = graph.getNeighbor(*consideringVertex);
-		if (neighbors.first == graph.end())
+		if (neighbors.first == neighbors.second)
 		{
 			continue;
 		}
