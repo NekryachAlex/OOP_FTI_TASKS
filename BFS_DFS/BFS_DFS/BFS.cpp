@@ -19,10 +19,10 @@ void BFSalgorithm::initAlgorithm()
 {
 	Vertex& startingVertex = start();
 
-	std::deque<Vertex*> waitingVertex; //problem with reference storage (but pointers can be storaged)
+	std::deque<Vertex*> waitingVertex;
 	waitingVertex.push_back(&startingVertex);
-	std::unordered_set<Vertex, Vertex::VertexHashFunction> visitedVertexes; //trouble with storage of reference to Vertex (insert and count will be broken).
-	//I think  problem is usage not constant variables (not const Vertex), but i couln't solve this problem.
+	std::unordered_set<Vertex, Vertex::VertexHashFunction> visitedVertexes;
+	
 	while (waitingVertex.size() != 0)
 	{
 		Vertex* consideringVertex = waitingVertex.front();
