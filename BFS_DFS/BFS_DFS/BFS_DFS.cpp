@@ -2,6 +2,8 @@
 #include "Graph.h"
 #include "BFS.h"
 #include "DFS.h"
+#include "BFS_ForTests.h"
+#include "DFS_ForTests.h"
 int main()
 {
 	Graph testGraph;
@@ -20,10 +22,11 @@ int main()
 	testGraph.AddEdge(testEdge25);
 	testGraph.AddEdge(testEdge34);
 
-	BFSalgorithm BFS(testGraph, testVertex1);
-	BFS.initAlgorithm();
-	DFSalgorithm DFS(testGraph, testVertex1);
-	DFS.initAlgorithm();
+	BFS_ForTests BFS(testGraph, testVertex1);
+	std::pair<long long, long long> countBFS = BFS.getAmountOfVertexes();
+	DFS_ForTests DFS(testGraph, testVertex1);
+	std::pair<long long, long long> countDFS = DFS.getAmountOfVertexes();
+
 	return 0;
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "API.h"
 #include "Graph.h"
-class DFSalgorithm final : public Strategy
+class DFSalgorithm : public Strategy
 {
 public:
 	DFSalgorithm(Graph& _graph, Vertex& _startingVertex): graph(_graph), startingVertex(_startingVertex) {};
