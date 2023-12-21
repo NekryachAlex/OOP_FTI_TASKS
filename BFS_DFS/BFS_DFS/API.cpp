@@ -1,8 +1,9 @@
 #include "API.h"
 
-std::deque<Vertex> Strategy::getAllVertexes() const
+std::deque<Vertex> Strategy::getAllVertexes()
 {
-	return std::deque<Vertex>();
+	initAlgorithm();
+	return allVertexes;
 }
 
 

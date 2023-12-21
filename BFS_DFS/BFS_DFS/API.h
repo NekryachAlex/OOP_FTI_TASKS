@@ -9,7 +9,7 @@ class Strategy
 {
 public:
 	virtual void initAlgorithm() = 0;
-	std::deque<Vertex> getAllVertexes() const; 
+	std::deque<Vertex> getAllVertexes();
 
 protected:
 	std::deque<Vertex> allVertexes;
@@ -30,6 +30,3 @@ public:
 	void run();
 	std::deque<Vertex> getAllVertexes() const;
 };
-//
-//API;
-//API.set_strategy(new BFS());

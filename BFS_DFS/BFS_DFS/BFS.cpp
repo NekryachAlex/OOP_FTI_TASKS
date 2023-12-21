@@ -26,7 +26,7 @@ void BFSalgorithm::initAlgorithm()
 	
 	while (waitingVertex.size() != 0)
 	{
-		const Vertex& consideringVertex = waitingVertex.front();
+		const Vertex consideringVertex = waitingVertex.front();
 		waitingVertex.pop_front();
 		vertexVisiting(consideringVertex);
 		visitedVertexes.insert(consideringVertex);

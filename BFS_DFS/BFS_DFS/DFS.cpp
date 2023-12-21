@@ -7,9 +7,11 @@ const Vertex& DFSalgorithm::start()
 {
 	return startingVertex;
 }
+
 void DFSalgorithm::end()
 {
 }
+
 void DFSalgorithm::vertexVisiting(const Vertex& visitedVertex)
 {
 	allVertexes.push_back(visitedVertex);
@@ -17,6 +19,7 @@ void DFSalgorithm::vertexVisiting(const Vertex& visitedVertex)
 void DFSalgorithm::edgeVisiting(const Edge& visitedEdge)
 {
 }
+
 void DFSalgorithm::initAlgorithm()
 {
 	const Vertex& startingVertex = start();
@@ -27,7 +30,7 @@ void DFSalgorithm::initAlgorithm()
 
 	while (waitingVertex.size() != 0)
 	{
-		const Vertex& consideringVertex = waitingVertex.top();
+		const Vertex consideringVertex = waitingVertex.top();
 		waitingVertex.pop();
 		vertexVisiting(consideringVertex);
 		visitedVertexes.insert(consideringVertex);

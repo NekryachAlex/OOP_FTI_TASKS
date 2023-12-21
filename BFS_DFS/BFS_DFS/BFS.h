@@ -1,7 +1,7 @@
 #pragma once
 #include "API.h"
 #include "Graph.h"
-class BFSalgorithm : public Strategy
+class BFSalgorithm final : public Strategy
 {
 public:
 	BFSalgorithm(const Graph& _graph, const Vertex& _startingVertex): graph(_graph), startingVertex(_startingVertex) {};
