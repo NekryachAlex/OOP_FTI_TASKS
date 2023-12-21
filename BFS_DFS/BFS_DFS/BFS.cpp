@@ -20,7 +20,7 @@ void BFSalgorithm::initAlgorithm()
 {
 	const Vertex& startingVertex = start();
 
-	std::deque<const Vertex> waitingVertex; 
+	std::deque<Vertex> waitingVertex; 
 	waitingVertex.push_back(startingVertex);
 	std::unordered_set<Vertex, Vertex::VertexHashFunction> visitedVertexes;
 	

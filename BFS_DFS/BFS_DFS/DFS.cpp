@@ -21,7 +21,7 @@ void DFSalgorithm::initAlgorithm()
 {
 	const Vertex& startingVertex = start();
 
-	std::stack<const Vertex> waitingVertex;
+	std::stack<Vertex> waitingVertex;
 	waitingVertex.push(startingVertex);
 	std::unordered_set<Vertex, Vertex::VertexHashFunction> visitedVertexes;
 

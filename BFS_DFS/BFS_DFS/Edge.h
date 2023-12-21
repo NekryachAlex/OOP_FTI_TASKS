@@ -6,24 +6,24 @@ class Edge final
 private:
     Vertex firstVertex;
     Vertex secondVertex;
-    int weight;
+    unsigned long weight;
 
 public:
-    Edge(const Vertex& _firstVertex, const Vertex& _secondVertex, const int _weight = 0) :
+    Edge(const Vertex& _firstVertex, const Vertex& _secondVertex, const unsigned long _weight = 0) :
         firstVertex(_firstVertex), secondVertex(_secondVertex), weight(_weight) {};
 
-    int getWeight() const 
+    unsigned long getWeight() const
     {
         return weight;
     }
 
-    Vertex& getFirstVertex() 
+    const Vertex& getFirstVertex() const 
     {
         return firstVertex;
     }
 
 
-    Vertex& getSecondVertex()
+    const Vertex& getSecondVertex() const 
     {
         return secondVertex;
     }

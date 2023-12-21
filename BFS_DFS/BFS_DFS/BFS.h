@@ -11,8 +11,8 @@ public:
 protected:
 	const Vertex& start() override;
 	void end() override;
-	void vertexVisiting(const Vertex&) override;
-	void edgeVisiting(const Edge&) override;
+	void vertexVisiting(const Vertex&);
+	void edgeVisiting(const Edge&);
     const Graph graph;
 	const Vertex startingVertex;
 };

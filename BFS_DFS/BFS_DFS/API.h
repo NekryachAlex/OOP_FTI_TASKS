@@ -9,10 +9,10 @@ class Strategy
 {
 public:
 	virtual void initAlgorithm() = 0;
-	std::deque<const Vertex> getAllVertexes() const; 
+	std::deque<Vertex> getAllVertexes() const; 
 
 protected:
-	std::deque<const Vertex> allVertexes;
+	std::deque<Vertex> allVertexes;
 
 	virtual const Vertex& start() = 0;
 	virtual void end() = 0;
@@ -22,13 +22,13 @@ protected:
 
 class API final {
 private:
-	std::shared_ptr<Strategy> strategyType;
+	std::shared_ptr<Strategy*> strategyType;
 
 public:
-	API(Strategy* strategy) : strategyType(strategy) {}
+	API(Strategy* strategy) : strategyType(std::make_shared<Strategy*>(strategy)) {}
 	void set_strategy(Strategy*);
 	void run();
-	std::deque<const Vertex> getAllVertexes() const;
+	std::deque<Vertex> getAllVertexes() const;
 };
 //
 //API;
