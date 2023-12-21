@@ -4,17 +4,16 @@
 class DFSalgorithm : public Strategy
 {
 public:
-	DFSalgorithm(Graph& _graph, Vertex& _startingVertex): graph(_graph), startingVertex(_startingVertex) {};
+	DFSalgorithm(const Graph& _graph, const Vertex& _startingVertex) : graph(_graph), startingVertex(_startingVertex) {};
 
 	void initAlgorithm() override;
 
 protected:
-	Vertex& start() override;
+	const Vertex& start() override;
 	void end() override;
-	void vertexVisiting(Vertex&) override;
-	void edgeVisiting(Edge&) override;
+	void vertexVisiting(const Vertex&) override;
+	void edgeVisiting(const Edge&) override;
 
-private:
-	Graph& graph;
-	Vertex& startingVertex;
+	const Graph graph;
+	const Vertex startingVertex;
 };

@@ -4,15 +4,15 @@
 class BFSalgorithm : public Strategy
 {
 public:
-	BFSalgorithm(Graph& _graph, Vertex& _startingVertex): graph(_graph), startingVertex(_startingVertex) {};
+	BFSalgorithm(const Graph& _graph, const Vertex& _startingVertex): graph(_graph), startingVertex(_startingVertex) {};
 
 	void initAlgorithm() override;
 
 protected:
-	Vertex& start() override;
+	const Vertex& start() override;
 	void end() override;
-	void vertexVisiting(Vertex&) override;
-	void edgeVisiting(Edge&) override;
-	Graph& graph;
-	Vertex& startingVertex;
+	void vertexVisiting(const Vertex&) override;
+	void edgeVisiting(const Edge&) override;
+    const Graph graph;
+	const Vertex startingVertex;
 };
